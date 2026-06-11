@@ -83,7 +83,7 @@ export function Navbar() {
 
         <div className="hidden md:block">
           <Link
-            href="/membership#register"
+            href="/membership"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-white px-6 py-2.5 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95"
           >
             <span className="relative z-10">Join ACM</span>
@@ -124,7 +124,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="/membership#register"
+                href="/membership"
                 onClick={() => setMobileMenuOpen(false)}
                 className="mt-4 rounded-full bg-white px-6 py-3 text-center font-bold text-black"
               >

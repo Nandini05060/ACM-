@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+
+  /* Deep Space Backgrounds */
+  --color-brand-900: #030712;
+  --color-brand-800: #0B1220;
+  
+  /* Primary Glow (Violet) */
+  --color-brand-purple: #8B5CF6;
+  --color-brand-purple-light: #A855F7;
+  
+  /* Secondary Glow (Cyan) */
+  --color-brand-teal: #00E5FF;
+  --color-brand-teal-light: #00D4FF;
+
+  /* Accent (Emerald) */
+  --color-brand-emerald: #14F195;
+  --color-brand-emerald-light: #00FFB2;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 3, 7, 18;
+  --background-end-rgb: 11, 18, 32;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #030712;
+  min-height: 100vh;
+  background-attachment: fixed;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Premium Glass Surfaces */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    position: relative;
+  }
+
+  /* Refined Glow Effects */
+  .glow-purple {
+    box-shadow: 0 0 50px -15px rgba(139, 92, 246, 0.5);
+  }
+
+  .glow-teal {
+    box-shadow: 0 0 50px -15px rgba(0, 229, 255, 0.5);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 50px -15px rgba(20, 241, 149, 0.4);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  }
+
+  .text-glow-teal {
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+  }
+
+  .text-glow-purple {
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+  }
+
+  .pause {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-25px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-float {
+  animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-float-delayed {
+  animation: float 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 4s;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
+
+.bg-aurora {
+  animation: float-slow 20s ease-in-out infinite alternate;
+}
+
+/* Silicon Valley Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #030712;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+/* Mobile Responsiveness & Safe Area Adjustments */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ensure form inputs, buttons, and navigation links have tap targets >= 44px */
+  input[type="text"],
+  input[type="email"],
+  input[type="submit"],
+  select,
+  textarea,
+  button,
+  .glass-card a,
+  nav a {
+    min-height: 44px;
+  }
+  
+  /* Exclude small floating admin button */
+  a[aria-label="Admin Access"] {
+    min-height: 32px !important;
+    min-width: 32px !important;
+  }
+
+  /* Spacing adjustment for top elements under header on mobile */
+  .flex-grow.pt-24 {
+    padding-top: 5.5rem !important; /* pt-22 equivalent */
+  }
+}

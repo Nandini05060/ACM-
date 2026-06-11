@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
+import RotatingDiamond from "@/components/animations/RotatingDiamond";
 
 async function getActiveEvents() {
   try {
@@ -50,7 +51,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden py-20 lg:py-0">
         {/* Cinematic Aurora Background */}
         <div className="absolute inset-0 bg-[#030712] z-[-2]" />
         <div className="bg-aurora absolute top-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-brand-purple/10 blur-[120px] mix-blend-screen z-[-1]" />
@@ -58,53 +59,86 @@ export default async function Home() {
         <div className="bg-aurora absolute top-[20%] right-[20%] h-[400px] w-[400px] rounded-full bg-brand-emerald/5 blur-[100px] mix-blend-screen z-[-1]" style={{ animationDelay: "4s" }} />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay pointer-events-none z-[-1]" />
 
-        <div className="relative z-10 container mx-auto px-6 pt-24 text-center">
-          <FadeUp delay={0.1}>
-            <div className="glass border-brand-teal/20 mb-10 inline-flex cursor-default items-center gap-3 rounded-full border px-5 py-2.5 shadow-sm transition-colors hover:bg-white/5">
-              <span className="bg-brand-teal h-2 w-2 rounded-full animate-pulse" />
-              <span className="text-brand-teal-light text-sm font-semibold tracking-[0.15em] uppercase">
-                SVKM's NMIMS Indore
-              </span>
+        <div className="relative z-10 container mx-auto px-6 pt-24 pb-12">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            {/* Left Column: Hero Text & Badges */}
+            <div className="flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
+              <FadeUp delay={0.1}>
+                <div className="glass border-brand-teal/20 mb-8 inline-flex cursor-default items-center gap-3 rounded-full border px-5 py-2.5 shadow-sm transition-colors hover:bg-white/5">
+                  <span className="bg-brand-teal h-2 w-2 rounded-full animate-pulse" />
+                  <span className="text-brand-teal-light text-sm font-semibold tracking-[0.15em] uppercase">
+                    SVKM's NMIMS Indore
+                  </span>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <h1 className="font-heading mb-6 text-5xl sm:text-7xl leading-[0.95] font-black tracking-tighter md:text-8xl">
+                  ACM Student <br className="hidden lg:block" />
+                  <span className="from-brand-purple-light via-brand-teal-light bg-gradient-to-br to-white bg-clip-text text-transparent">
+                    Chapter
+                  </span>
+                </h1>
+              </FadeUp>
+
+              <FadeUp delay={0.3}>
+                <p className="font-heading mb-6 text-2xl leading-relaxed font-semibold text-white md:text-3xl">
+                  Fostering Innovation. Building Community.
+                </p>
+                <p className="mb-8 max-w-2xl text-lg leading-relaxed font-medium text-gray-400 md:text-xl">
+                  The ACM Student Chapter at SVKM's NMIMS Indore (STME) provides a peer-driven technical ecosystem,
+                  helping students bridge the gap between academic study and modern industry practices.
+                </p>
+              </FadeUp>
+
+              {/* Desktop/Tablet CTA Buttons (visible on sm and up) */}
+              <FadeUp
+                delay={0.4}
+                className="hidden sm:flex flex-row items-center gap-6 justify-center lg:justify-start w-full"
+              >
+                <Link
+                  href="/membership#register"
+                  className="group text-black relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-4.5 font-bold transition-all duration-300 hover:scale-[1.02] hover:bg-gray-100 active:scale-95 shadow-md"
+                >
+                  <span className="relative z-10 text-base">Join ACM Today</span>
+                  <ChevronRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/achievements"
+                  className="glass inline-flex items-center justify-center gap-2 rounded-full px-8 py-4.5 text-base font-bold text-white backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/10"
+                >
+                  Explore Accomplishments
+                </Link>
+              </FadeUp>
             </div>
-          </FadeUp>
 
-          <FadeUp delay={0.2}>
-            <h1 className="font-heading mb-6 text-5xl sm:text-7xl leading-[0.9] font-black tracking-tighter md:text-8xl lg:text-[10rem]">
-              ACM Student <br className="hidden md:block" />
-              <span className="from-brand-purple-light via-brand-teal-light bg-gradient-to-br to-white bg-clip-text text-transparent">
-                Chapter
-              </span>
-            </h1>
-          </FadeUp>
+            {/* Right Column: Interactive 3D Rotating Diamond & Mobile CTAs */}
+            <div className="w-full lg:col-span-5 flex flex-col items-center gap-8">
+              <FadeUp delay={0.35} className="w-full max-w-[450px]">
+                <RotatingDiamond />
+              </FadeUp>
 
-          <FadeUp delay={0.3}>
-            <p className="font-heading mx-auto mb-6 max-w-4xl text-2xl leading-relaxed font-semibold text-white md:text-3xl">
-              Fostering Innovation. Building Community.
-            </p>
-            <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed font-medium text-gray-400 md:text-xl">
-              The ACM Student Chapter at SVKM's NMIMS Indore (STME) provides a peer-driven technical ecosystem,
-              helping students bridge the gap between academic study and modern industry practices.
-            </p>
-          </FadeUp>
-
-          <FadeUp
-            delay={0.4}
-            className="flex flex-col items-center justify-center gap-6 sm:flex-row"
-          >
-            <Link
-              href="/membership#register"
-              className="group text-black relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-4.5 font-bold transition-all duration-300 hover:scale-[1.02] hover:bg-gray-100 active:scale-95 sm:w-auto shadow-md"
-            >
-              <span className="relative z-10 text-base">Join ACM Today</span>
-              <ChevronRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/achievements"
-              className="glass inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4.5 text-base font-bold text-white backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/10 sm:w-auto"
-            >
-              Explore Our Accomplishments
-            </Link>
-          </FadeUp>
+              {/* Mobile CTA Buttons (visible only on < sm) */}
+              <FadeUp
+                delay={0.45}
+                className="sm:hidden flex flex-col gap-4 w-full"
+              >
+                <Link
+                  href="/membership#register"
+                  className="group text-black relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-4.5 font-bold transition-all duration-300 active:scale-95 shadow-md"
+                >
+                  <span className="relative z-10 text-base">Join ACM Today</span>
+                  <ChevronRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/achievements"
+                  className="glass inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4.5 text-base font-bold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+                >
+                  Explore Accomplishments
+                </Link>
+              </FadeUp>
+            </div>
+          </div>
         </div>
       </section>
 
